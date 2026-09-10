@@ -28,17 +28,18 @@ resource "aws_key_pair" "main" {
 }
 
 module "web" {
-  source        = "git::https://github.com/hddah/terraform-aws-ec2-server.git?ref=v1.0.0"
-  name          = "${var.environment}-web"
-  ami_id        = data.aws_ami.debian.id
-  instance_type = var.instance_type
-  key_name      = aws_key_pair.main.key_name
-  admin_cidr    = local.my_cidr
-  open_ports    = [80]
+  source                 = "git::https://github.com/hddah/terraform-aws-ec2-server.git?ref=v1.1.0"
+  name                   = "${var.environment}-web"
+  ami_id                 = data.aws_ami.debian.id
+  instance_type          = var.instance_type
+  key_name               = aws_key_pair.main.key_name
+  admin_cidr             = local.my_cidr
+  open_ports             = [80]
+  enable_monitoring_port = true
 }
 
 module "monitoring" {
-  source        = "git::https://github.com/hddah/terraform-aws-ec2-server.git?ref=v1.0.0"
+  source        = "git::https://github.com/hddah/terraform-aws-ec2-server.git?ref=v1.1.0"
   name          = "${var.environment}-monitoring"
   ami_id        = data.aws_ami.debian.id
   instance_type = var.instance_type
