@@ -30,7 +30,7 @@ resource "aws_key_pair" "main" {
 }
 
 module "web" {
-  source        = "./modules/ec2-server"
+  source        = "git::https://github.com/hddah/terraform-aws-ec2-server.git?ref=v1.0.0"
   name          = "web"
   ami_id        = data.aws_ami.debian.id
   instance_type = var.instance_type
@@ -40,7 +40,7 @@ module "web" {
 }
 
 module "monitoring" {
-  source        = "./modules/ec2-server"
+  source        = "git::https://github.com/hddah/terraform-aws-ec2-server.git?ref=v1.0.0"
   name          = "monitoring"
   ami_id        = data.aws_ami.debian.id
   instance_type = var.instance_type
